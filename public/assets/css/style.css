@@ -1,0 +1,54 @@
+.body-home {
+    background-color: #404040;
+}
+
+.body-login {
+background-color: blueviolet;
+}
+
+.container-fluid {
+    height: 95vh;
+}
+
+.aside {
+    height: 95vh;
+}
+aside li a{
+    text-decoration:none;
+    color:white
+}
+aside li{
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:5px;
+    transition:.3s;
+}
+aside li:hover{
+
+    background-color:white;
+}
+aside li:hover a{
+    color:black;
+}
+header {
+    background-color: blueviolet;
+    box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.body-signup {
+    background-color: blueviolet;
+}
+
+.link-color {
+    color: black;
+}
+
+.container-form-search .search-form .search-input {
+    background-color: rgb(135, 132, 136);
+    border: none;
+    border-radius: 50px;
+}
+
+::placeholder {
+    color: white;
+}
