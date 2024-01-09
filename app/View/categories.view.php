@@ -82,30 +82,38 @@ include "../app/View/includs/header.php";
             <div class="container-fluid row h-50">
                 <?php foreach($data as $row){ ?> 
                     <div class="col-md-4 mt-4 d-flex align-items-center">
-                        <button class="bg-secondary bg-gradient h-50 w-75 rounded shadow-lg border border-warning" data-bs-toggle="modal" data-bs-target="#delete_update<?= $row->id ?>">
-                            <h2 class="text-light"><?= $row->categorie_name ?></h2>    
-                        </button>
-                        <div class="modal fade" id="delete_update<?= $row->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Management</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h2><?= $row->categorie_name ?></h2>
-                                    <div class="modal-body d-flex justify-content-evenly">
-                                            <a href="http://localhost/Wiki/categorie/delete_categorie/categorie_id=<?= $row->id ?>" class="btn btn-outline-danger">Delete</a>
-                                            <a href="" class="btn btn-outline-success">Update</a>
-                                        </form>
+                        <div class="bg-secondary bg-gradient h-75 w-75 rounded shadow-lg border border-warning d-flex flex-column justify-content-evenly" >
+                            <h2 class="text-light text-center"><?= $row->categorie_name ?></h2>   
+                            <div class="d-flex justify-content-around">
+                                <a href="http://localhost/Wiki/categorie/delete_categorie/delete_id?delete_id=<?= $row->id ?>" class="btn btn-outline-danger">Delete</a>
+                                <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#update<?= $row->id ?>">Update</button>
+
+                                <div class="modal fade" id="update<?= $row->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Categorie</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="modal-body">
+                                                    <form action="http://localhost/Wiki/categorie/update_categorie/update_id?update_id=<?= $row->id ?>" method="POST">
+                                                        <div class="mb-3">
+                                                            <label for="categorie_name" class="form-label">Categorie Name:</label>
+                                                            <input type="text" class="form-control" id="name" value="<?= $row->categorie_name ?>" name="categorie_name" required>
+                                                        </div>
+                                                        <button type="submit" name="submit" value="update_categorie" class="btn btn-primary">Update</button>
+                                                    </form>
+                                                </div>
+                
+                                            </div>
+                                        </div>
                                     </div>
-    
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 <?php } ?>
             </div>
