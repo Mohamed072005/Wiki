@@ -1,10 +1,10 @@
-
 <?php
 
+namespace App\Controller;
 
 use App\Core\Controller;
 
-class Home extends Controller {
+class HomeController extends Controller {
     public function index(){
 
         // $obj = new User;
@@ -14,8 +14,6 @@ class Home extends Controller {
         // $obj = new User;
         // $result = $obj->selectAll();
         // Show($result);
-
-
         // echo "Hello from Controller";
         $this->view('home');
     }

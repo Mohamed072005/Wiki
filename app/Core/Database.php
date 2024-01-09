@@ -22,35 +22,35 @@ class Database {
         }
     }
 
-    public function query($query, $data = []){
-        $conn = $this->connect();
-        $stmt = $conn->prepare($query);
+    // public function query($query, $data = []){
+    //     $conn = $this->connect();
+    //     $stmt = $conn->prepare($query);
 
-        $check = $stmt->execute($data);
-        if($check){
-            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-            if(is_array($result) && count($result)){
-                return $result;
-            }
-        }else {
-            return false;
-        }
-    }
+    //     $check = $stmt->execute($data);
+    //     if($check){
+    //         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+    //         if(is_array($result) && count($result)){
+    //             return $result;
+    //         }
+    //     }else {
+    //         return false;
+    //     }
+    // }
 
-    public function get_row($query, $data = []){
-        $conn = $this->connect();
-        $stmt = $conn->prepare($query);
+    // public function get_row($query, $data = []){
+    //     $conn = $this->connect();
+    //     $stmt = $conn->prepare($query);
 
-        $check = $stmt->execute($data);
-        if($check){
-            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-            if(is_array($result) && count($result)){
-                return $result[0];
-            }
-        }else {
-            return false;
-        } 
-    }
+    //     $check = $stmt->execute($data);
+    //     if($check){
+    //         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+    //         if(is_array($result) && count($result)){
+    //             return $result[0];
+    //         }
+    //     }else {
+    //         return false;
+    //     } 
+    // }
 }
 
 
