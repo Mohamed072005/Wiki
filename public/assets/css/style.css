@@ -2,10 +2,6 @@
     background-color: #404040;
 }
 
-.body-login {
-background-color: blueviolet;
-}
-
 .container-fluid {
     height: 95vh;
 }
@@ -35,7 +31,7 @@ header {
     box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.body-signup {
+.body-signup, .body-login {
     background-color: blueviolet;
 }
 

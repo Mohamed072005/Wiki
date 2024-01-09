@@ -12,13 +12,13 @@ include "../app/View/includs/header.php";
 
         <div class="dropdown">
             <button class="btn btn-dark dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                actions
+                <?=$_SESSION['first_name']?>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="http://localhost/Wiki/login">Logout</a></li>
+                <li><a class="dropdown-item" href="http://localhost/Wiki/autho">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -30,10 +30,8 @@ include "../app/View/includs/header.php";
             <ul class="list-unstyled">
 
                     <li><a href="#">dashboard</a></li>
-                    <li><a href="utilisteur.php">authors</a></li>
-
-                    <li><a href="hotel.php">Wikis</a></li>
-
+                    <li><a href="">authors</a></li>
+                    <li><a href="">Wikis</a></li>
             </ul>
 
         </aside>
@@ -50,7 +48,7 @@ include "../app/View/includs/header.php";
                     
                 </div>
     
-                <section class="section dashboard">
+                <!-- <section class="section dashboard">
                     <a type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">add Wiki</a>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
@@ -94,7 +92,7 @@ include "../app/View/includs/header.php";
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
             
         </main>
     </div>
