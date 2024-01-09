@@ -7,10 +7,13 @@ include "../app/View/includs/header.php";
             <div>
                 <h1 class="text-light">Hello, <?= $_SESSION['first_name'], " ", $_SESSION['last_name'] ?></h1>
             </div>
-            <div>
-                <img src="" alt="">
+            <div class="text-center mt-4">
+                <img src="<?= IMG_ROOT ?>/assets/img/wikipedia.png" class="img-fluid" alt="">
             </div>
-            <div class="text-center">
+            <div class="mt-4">
+                <h3 class="text-center text-light">Wiki Family</h3>
+            </div>
+            <div class="text-center mt-4">
                 <a class="btn btn-outline-warning" href="http://localhost/Wiki/">Enter</a>
             </div>
         </div>
