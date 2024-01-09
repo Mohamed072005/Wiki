@@ -26,7 +26,7 @@ class AuthoController extends Controller {
             $newUser->setLastname($last_name);
             $newUser->setEmail($email);
             $newUser->setPassword($password);
-            $newUser->setRoleId(1);
+            $newUser->setRoleId(2);
             $result = $newUser->register();
             if($result){
                 $this->view('login');
@@ -52,5 +52,10 @@ class AuthoController extends Controller {
             }
     }
 }
+
+    public function logout(){
+        session_destroy();
+        $this->view('login');
+    }
 
 }

@@ -20,6 +20,9 @@ include "../app/View/includs/header.php";
                 <div class="col-12 text-center mb-4">
                     <button class="btn btn-outline-warning" name="submit" value="login" type="submit">Log in</button>
                 </div>
+                <div class="col-12 text-center mb-4">
+                    <?php if(!empty($_SESSION['error_login'])){ echo $_SESSION['error_login']; } ?>
+                </div>
                 <div class="col-12 text-center">
                     <span class="text-light">Need an account? <a class="link-color" href="http://localhost/Wiki/autho/to_signup">sing in</a></span>
                 </div>

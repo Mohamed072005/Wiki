@@ -80,6 +80,7 @@ class UserModel {
     }
 
     public function login($email, $password){
+        $error = "";
         $conn = $this->conn->connect();
         $query = "SELECT * FROM users WHERE email = :email AND passwordd = :passwordd";
         $stmt = $conn->prepare($query);
@@ -90,12 +91,21 @@ class UserModel {
         $result = $stmt->fetch(PDO::FETCH_OBJ);
 
         if($stmt->rowCount($result) > 0){
-            $_SESSION['user_id'] = $result->id;
-            $_SESSION['first_name'] = $result->first_name;
-            $_SESSION['last_name'] = $result->last_name;
-            $_SESSION['role_id'] = $result->role_id;
-            return true;
+            if($password == $result->passwordd){
+                $_SESSION['user_id'] = $result->id;
+                $_SESSION['first_name'] = $result->first_name;
+                $_SESSION['last_name'] = $result->last_name;
+                $_SESSION['role_id'] = $result->role_id;
+                return true;
+            }else{
+                $error = '<h5 class = "text-danger">You have a wrong in your password input</h5>';
+                $_SESSION['error_login'] = $error;
+                return false;
+            }
+            
         }else {
+            $error = '<h5 class = "text-danger">A user with this email does not existe</h5>';
+            $_SESSION['error_login'] = $error;
             return false;
         }
 

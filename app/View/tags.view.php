@@ -1,4 +1,3 @@
-
 <?php
 include "../app/View/includs/header.php";
 ?>
@@ -18,7 +17,7 @@ include "../app/View/includs/header.php";
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="http://localhost/Wiki/autho/logout">Logout</a></li>
+                <li><a class="dropdown-item" href="http://localhost/Wiki/autho">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -35,7 +34,7 @@ include "../app/View/includs/header.php";
                     <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
                 <?php } ?>
                     
-                    <li><a href="http://localhost/Wiki/autho/logout">authors</a></li>
+                    <li><a href="">authors</a></li>
                     
             </ul>
 
@@ -44,17 +43,17 @@ include "../app/View/includs/header.php";
 
             <main class="col-md-10 p-3 main-content">
 
-                <!-- <div class="container-form-search container d-flex justify-content-center">
+                <div class="container-form-search container d-flex justify-content-center">
                     
                         <form class="search-form w-75 d-flex justify-content-center" role="search">
                             <input class="search-input form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-warning">Search</button>
                         </form>
                     
-                </div> -->
+                </div>
     
-                <!-- <section class="section dashboard">
-                    <a type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">add Wiki</a>
+                <section class="section dashboard">
+                    <a type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">add Tag</a>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog">
@@ -97,7 +96,7 @@ include "../app/View/includs/header.php";
                             </div>
                         </div>
                     </div>
-                </section> -->
+                </section>
             
         </main>
     </div>
@@ -109,4 +108,3 @@ include "../app/View/includs/header.php";
 </body>
 
 </html>
-
