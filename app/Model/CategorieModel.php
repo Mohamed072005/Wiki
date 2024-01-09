@@ -66,4 +66,18 @@ class CategorieModel {
             return false;
         }
     }
+
+    public function update_categorie(){
+
+        $conn = $this->conn->connect();
+
+        $query = "UPDATE categories SET categorie_name = '{$this->categorie_name}' WHERE id = {$this->categorie_id}";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        if($stmt){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

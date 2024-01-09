@@ -17,7 +17,7 @@ class CategorieController extends Controller {
         if($categorie == true){
             $this->view('categories', $categorie);
         }else {
-            echo "No result";
+            $this->view('categories');
         }
     }
 
@@ -39,8 +39,8 @@ class CategorieController extends Controller {
     }
 
     public function delete_categorie(){
-        if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['categorie_id'])){
-            $categorie_id = $_GET['categorie_id'];
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])){
+            $categorie_id = $_GET['delete_id'];
 
             $newCategorie = new CategorieModel();
             $newCategorie->set_categories_id($categorie_id);
@@ -52,4 +52,25 @@ class CategorieController extends Controller {
             }
         }
     }
+
+    public function update_categorie(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'update_categorie'){
+
+                $categorie_id = $_GET['update_id'];
+                $categorie_name = $_POST['categorie_name'];
+    
+                $newCategorie = new CategorieModel();
+                $newCategorie->set_categories_id($categorie_id);
+                $newCategorie->set_categories_name($categorie_name);
+                $result = $newCategorie->update_categorie();
+    
+                if($result){
+                    $this->display_categorie();
+                }else{
+                    $this->view('categories');
+                }
+            }
+            
+        }
 }
