@@ -61,7 +61,7 @@ class TagModel {
     public function delete_tag(){
         $conn = $this->conn->connect();
 
-        $query = "DELETE FROM tags WHERE id = {$this->tag_id}";
+        $query = "DELETE FROM tags WHERE id_tag = {$this->tag_id}";
         $stmt = $conn->prepare($query);
         $stmt->execute();
 
@@ -75,7 +75,7 @@ class TagModel {
     public function update_tag(){
         $conn = $this->conn->connect();
 
-        $query = "UPDATE tags SET tag_name = '{$this->tag_name}' WHERE id = '{$this->tag_id}'";
+        $query = "UPDATE tags SET tag_name = '{$this->tag_name}' WHERE id_tag = '{$this->tag_id}'";
         $stmt = $conn->prepare($query);
         $stmt->execute();
 

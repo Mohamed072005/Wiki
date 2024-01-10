@@ -92,7 +92,7 @@ class UserModel {
 
         if($stmt->rowCount($result) > 0){
             if($password == $result->passwordd){
-                $_SESSION['user_id'] = $result->id;
+                $_SESSION['user_id'] = $result->id_user;
                 $_SESSION['first_name'] = $result->first_name;
                 $_SESSION['last_name'] = $result->last_name;
                 $_SESSION['role_id'] = $result->role_id;

@@ -57,7 +57,7 @@ class CategorieModel {
 
     public function delete_categorie(){
         $conn = $this->conn->connect();
-        $query = "DELETE FROM categories WHERE id = {$this->categorie_id}";
+        $query = "DELETE FROM categories WHERE id_categorie = {$this->categorie_id}";
         $stmt = $conn->prepare($query);
         $stmt->execute();
         if($stmt){
@@ -71,7 +71,7 @@ class CategorieModel {
 
         $conn = $this->conn->connect();
 
-        $query = "UPDATE categories SET categorie_name = '{$this->categorie_name}' WHERE id = {$this->categorie_id}";
+        $query = "UPDATE categories SET categorie_name = '{$this->categorie_name}' WHERE id_categorie = {$this->categorie_id}";
         $stmt = $conn->prepare($query);
         $stmt->execute();
         if($stmt){

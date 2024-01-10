@@ -32,6 +32,7 @@ namespace App\Core;
 use App\Controller\AuthoController;
 use App\Controller\HomeController;
 use App\controller\_404;
+use App\Controller\_404Controller;
 
 class App {
     private static $controller ;
@@ -65,12 +66,12 @@ class App {
             
             } else {
         
-                self::$controller = new _404();
-                call_user_func_array([self::$controller,self::$method],$url);
+                self::$controller = new _404Controller();
+                call_user_func_array([self::$controller, 'index'],$url);
             }
         } else {
-            self::$controller = new _404();
-            call_user_func_array([self::$controller,self::$method],$url);
+            self::$controller = new _404Controller();
+            call_user_func_array([self::$controller, 'index'],$url);
         }
     }
 }

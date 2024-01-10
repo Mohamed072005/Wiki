@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Controller;
+use App\Core\Controller;
+use App\Model\WikiModel;
+use WeakMap;
+
+class WikiController extends Controller {
+    public function index(){
+        $this->view('wikis');
+    }
+
+
+    public function insert_wiki(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'insert_wiki'){
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+            $categorie_id = $_POST['categorie'];
+            $tag_id = $_POST['tag'];
+            $date_create = date('y-m-d h:i:s');
+
+            $newWiki = new WikiModel();
+            $newWiki->setWikiContent($content);
+            $newWiki->setWikiTitle($title);
+            $newWiki->setCategorieId($categorie_id);
+            $newWiki->setTagId($tag_id);
+            $newWiki->setDateCreate($date_create);
+            $newWiki->insert_wiki();
+        }
+    }
+
+
+    public function select_options_categories(){
+        $newWiki = new WikiModel();
+        $result = $newWiki->select_options_categories();
+        if($result){
+            return $result;
+        }else {
+            return 'No result';
+        }
+    }
+
+    public function select_options_tags(){
+        $newWiki = new WikiModel();
+        $result = $newWiki->select_options_tage();
+        if($result){
+            return $result;
+        }else {
+            return 'No result';
+        }
+    }
+
+    public function display_wiki(){
+        $newWiki = new WikiModel();
+        $result = $newWiki->select_wiki();
+        if($result){
+            $result2 = $this->select_options_tags();
+            $result3 = $this->select_options_categories();
+            $this->view('wikis', $result, $result2, $result3);
+        }else {
+            $this->view('404');
+        }
+    }
+
+    public function delete_wiki(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id']) && isset($_GET['id_WT'])){
+            $id_wiki = $_GET['delete_id'];
+            $id_WT = $_GET['id_WT'];
+
+            $newWiki = new WikiModel();
+            $newWiki->setWikiId($id_wiki);
+            $result = $newWiki->delete_wiki($id_WT);
+            
+            if($result){
+                $this->display_wiki();
+            }else {
+                $this->view('404');
+            }
+
+        }
+    }
+}

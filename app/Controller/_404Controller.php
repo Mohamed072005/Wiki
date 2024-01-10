@@ -2,10 +2,10 @@
 namespace App\Controller;
 use App\Core\Controller;
 
-class _404 extends Controller {
+class _404Controller extends Controller {
     public function index(){
         // echo "<h1>Error, This page not found</h1>";
-        $this->view('hhhhh');
+        $this->view('404');
     }
 
 }

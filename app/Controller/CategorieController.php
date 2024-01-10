@@ -55,7 +55,7 @@ class CategorieController extends Controller {
 
     public function update_categorie(){
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'update_categorie'){
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'update_categorie' && isset($_GET['update_id'])){
 
                 $categorie_id = $_GET['update_id'];
                 $categorie_name = $_POST['categorie_name'];

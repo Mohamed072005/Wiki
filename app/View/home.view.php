@@ -1,5 +1,6 @@
 
 <?php
+
 include "../app/View/includs/header.php";
 ?>
 <body class="body-home">
@@ -30,12 +31,11 @@ include "../app/View/includs/header.php";
             <ul class="list-unstyled">
                 <?php if($_SESSION['role_id'] == 1){ ?>
                     <li><a href="http://localhost/Wiki/home">dashboard</a></li>
-                    <li><a href="http://localhost/Wiki/wikis/display_wiki">Wikis</a></li>
                     <li><a href="http://localhost/Wiki/tag/display_tag">Tags</a></li>
                     <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
                 <?php } ?>
-                    
-                    <li><a href="http://localhost/Wiki/autho/logout">authors</a></li>
+                    <li><a href="http://localhost/Wiki/wiki/display_wiki">Wikis</a></li>
+                    <li><a href="">authors</a></li>
                     
             </ul>
 
