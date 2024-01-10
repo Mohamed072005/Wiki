@@ -29,8 +29,8 @@ include "../app/View/includs/header.php";
             <ul class="list-unstyled">
                 <?php if($_SESSION['role_id'] == 1){ ?>
                     <li><a href="http://localhost/Wiki/home">dashboard</a></li>
-                    <li><a href="http://localhost/Wiki/home/to_wikis">Wikis</a></li>
-                    <li><a href="http://localhost/Wiki/home/to_tags">Tags</a></li>
+                    <li><a href="http://localhost/Wiki/wikis/display_wiki">Wikis</a></li>
+                    <li><a href="http://localhost/Wiki/tag/display_tag">Tags</a></li>
                     <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
                 <?php } ?>
                     
@@ -59,36 +59,18 @@ include "../app/View/includs/header.php";
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Hotel</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Tag</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal-body">
-                                        <form action="" method="post" >
+                                    <form action="http://localhost/Wiki/tag/insert_tag" method="POST" >
                                             <div class="mb-3">
-                                                <label for="name" class="form-label">Name:</label>
-                                                <input type="text" class="form-control" id="name" name="name" required>
+                                                <label for="categorie_name" class="form-label">Tag Name:</label>
+                                                <input type="text" class="form-control" id="name" name="tag_name" required>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="contactNumber" class="form-label">Contact Number:</label>
-                                                <input type="tel" class="form-control" id="contactNumber"
-                                                       name="contactNumber" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="amenities" class="form-label">Amenities:</label>
-                                                <input type="text" class="form-control" id="amenities" name="amenities"
-                                                       required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="pays" class="form-label">Pays:</label>
-                                                <input type="text" class="form-control" id="pays" name="pays" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="ville" class="form-label">Ville:</label>
-                                                <input type="text" class="form-control" id="ville" name="ville" required>
-                                            </div>
-                                            <button type="submit" name="inserthotel" class="btn btn-primary">add hotel</button>
+                                            <button type="submit" name="submit" value="insert_tag" class="btn btn-primary">add Tag</button>
                                         </form>
                                     </div>
     
@@ -97,7 +79,46 @@ include "../app/View/includs/header.php";
                         </div>
                     </div>
                 </section>
-            
+
+
+                <div class="container-fluid row h-50">
+                <?php foreach($data as $row){ ?> 
+                    <div class="col-md-4 mt-4 d-flex align-items-center">
+                        <div class="bg-secondary bg-gradient h-75 w-75 rounded shadow-lg border border-warning d-flex flex-column justify-content-evenly" >
+                            <h2 class="text-light text-center"><?= $row->tag_name ?></h2>   
+                            <div class="d-flex justify-content-around">
+                                <a href="http://localhost/Wiki/tag/delete_tag/delete_id?delete_id=<?= $row->id ?>" class="btn btn-outline-danger">Delete</a>
+                                <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#update<?= $row->id ?>">Update</button>
+                                 <!-- MODAL -->
+                                <div class="modal fade" id="update<?= $row->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Tag</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="modal-body">
+                                                    <form action="http://localhost/Wiki/tag/update_tag/update_id?update_id=<?= $row->id ?>" method="POST">
+                                                        <div class="mb-3">
+                                                            <label for="categorie_name" class="form-label">Tag Name:</label>
+                                                            <input type="text" class="form-control" id="name" value="<?= $row->tag_name ?>" name="tag_name" required>
+                                                        </div>
+                                                        <button type="submit" name="submit" value="update_tag" class="btn btn-primary">Update</button>
+                                                    </form>
+                                                </div>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
         </main>
     </div>
 </div>
