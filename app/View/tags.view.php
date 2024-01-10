@@ -27,13 +27,12 @@ include "../app/View/includs/header.php";
         <aside class="col-md-2 bg-dark text-light p-4 aside">
 
             <ul class="list-unstyled">
-                <?php if($_SESSION['role_id'] == 1){ ?>
+            <?php if($_SESSION['role_id'] == 1){ ?>
                     <li><a href="http://localhost/Wiki/home">dashboard</a></li>
-                    <li><a href="http://localhost/Wiki/wikis/display_wiki">Wikis</a></li>
                     <li><a href="http://localhost/Wiki/tag/display_tag">Tags</a></li>
                     <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
                 <?php } ?>
-                    
+                    <li><a href="http://localhost/Wiki/wiki/display_wiki">Wikis</a></li>
                     <li><a href="">authors</a></li>
                     
             </ul>
@@ -84,13 +83,13 @@ include "../app/View/includs/header.php";
                 <div class="container-fluid row h-50">
                 <?php foreach($data as $row){ ?> 
                     <div class="col-md-4 mt-4 d-flex align-items-center">
-                        <div class="bg-secondary bg-gradient h-75 w-75 rounded shadow-lg border border-warning d-flex flex-column justify-content-evenly" >
-                            <h2 class="text-light text-center"><?= $row->tag_name ?></h2>   
-                            <div class="d-flex justify-content-around">
-                                <a href="http://localhost/Wiki/tag/delete_tag/delete_id?delete_id=<?= $row->id ?>" class="btn btn-outline-danger">Delete</a>
-                                <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#update<?= $row->id ?>">Update</button>
+                        <div class="bg-secondary bg-gradient rounded shadow-lg border border-warning d-flex flex-column justify-content-evenly" style="width: 350px;">
+                            <h2 class="text-light text-center mt-4 mb-4"><?= $row->tag_name ?></h2>   
+                            <div class="d-flex justify-content-around mt-4 mb-4">
+                                <a href="http://localhost/Wiki/tag/delete_tag/delete_id?delete_id=<?= $row->id_tag ?>" class="btn btn-outline-danger">Delete</a>
+                                <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#update<?= $row->id_tag ?>">Update</button>
                                  <!-- MODAL -->
-                                <div class="modal fade" id="update<?= $row->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                <div class="modal fade" id="update<?= $row->id_tag ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
                                      aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -101,7 +100,7 @@ include "../app/View/includs/header.php";
                                             </div>
                                             <div class="modal-body">
                                                 <div class="modal-body">
-                                                    <form action="http://localhost/Wiki/tag/update_tag/update_id?update_id=<?= $row->id ?>" method="POST">
+                                                    <form action="http://localhost/Wiki/tag/update_tag/update_id?update_id=<?= $row->id_tag ?>" method="POST">
                                                         <div class="mb-3">
                                                             <label for="categorie_name" class="form-label">Tag Name:</label>
                                                             <input type="text" class="form-control" id="name" value="<?= $row->tag_name ?>" name="tag_name" required>
@@ -124,8 +123,10 @@ include "../app/View/includs/header.php";
 </div>
 
 
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

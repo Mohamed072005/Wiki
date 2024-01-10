@@ -3,11 +3,11 @@
 }
 
 .container-fluid {
-    height: 95vh;
+    height: auto;
 }
 
 .aside {
-    height: 95vh;
+    height: 100vh;
 }
 aside li a{
     text-decoration:none;

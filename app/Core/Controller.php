@@ -4,7 +4,7 @@ namespace App\Core;
 
 class Controller {
 
-    public function view($name, $data = []){
+    public function view($name, $data = [], $data_tag = [], $data_cate = []){
 
         // if(!empty($data)){
         //     extract($data);

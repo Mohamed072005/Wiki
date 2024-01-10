@@ -29,11 +29,10 @@ include "../app/View/includs/header.php";
             <ul class="list-unstyled">
                 <?php if($_SESSION['role_id'] == 1){ ?>
                     <li><a href="http://localhost/Wiki/home">dashboard</a></li>
-                    <li><a href="http://localhost/Wiki/wikis/display_wiki">Wikis</a></li>
                     <li><a href="http://localhost/Wiki/tag/display_tag">Tags</a></li>
                     <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
                 <?php } ?>
-                    
+                    <li><a href="http://localhost/Wiki/wiki/display_wiki">Wikis</a></li>
                     <li><a href="">authors</a></li>
                     
             </ul>
@@ -59,36 +58,39 @@ include "../app/View/includs/header.php";
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Hotel</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Wki</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal-body">
-                                        <form action="" method="post" >
+                                        <form action="http://localhost/Wiki/wiki/insert_wiki" method="POST">
                                             <div class="mb-3">
-                                                <label for="name" class="form-label">Name:</label>
-                                                <input type="text" class="form-control" id="name" name="name" required>
+                                                <label for="name" class="form-label">Title:</label>
+                                                <input type="text" class="form-control" id="name" name="title" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="contactNumber" class="form-label">Contact Number:</label>
-                                                <input type="tel" class="form-control" id="contactNumber"
-                                                       name="contactNumber" required>
+                                                <label for="contactNumber" class="form-label d-block">The Content:</label>
+                                                <textarea type="text" id="contactNumber" class="form-control"
+                                                       name="content" required></textarea>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="amenities" class="form-label">Amenities:</label>
-                                                <input type="text" class="form-control" id="amenities" name="amenities"
-                                                       required>
+                                                <label for="contactNumber" class="form-label d-block">The Categories:</label>
+                                                <?php foreach($data_cate as $rows){?>
+                                                    <input type="checkbox" class="" autocomplete="off">
+                                                    <label class="btn btn-outline-primary"><?= $rows->categorie_name ?></label>
+                                                <?php } ?>
+                                                
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="pays" class="form-label">Pays:</label>
-                                                <input type="text" class="form-control" id="pays" name="pays" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="ville" class="form-label">Ville:</label>
-                                                <input type="text" class="form-control" id="ville" name="ville" required>
-                                            </div>
-                                            <button type="submit" name="inserthotel" class="btn btn-primary">add hotel</button>
+                                            <!-- <div class="mb-3">
+                                                <label for="pays" class="form-label">Hashtag:</label>
+                                                <select id ="js-example-basic-multiple" class="form-select" name="states[]" multiple="multiple">
+                                                    <option value="AL">Alabama</option>
+                                                    <option value="">ftftf</option>
+                                                    <option value="WY">Wyoming</option>
+                                                </select>
+                                            </div> -->
+                                            <button type="submit" name="submit" value="insert_wiki" class="btn btn-primary">add Wiki</button>
                                         </form>
                                     </div>
     
@@ -97,7 +99,33 @@ include "../app/View/includs/header.php";
                         </div>
                     </div>
                 </section>
-            
+
+
+                <div class="container-fluid row h-50">
+                    <?php foreach($data as $row){ ?>
+                    <div class="col-md-4 mt-4 d-flex align-items-center">
+                        <?php if($row->wiki_status == 0){ ?>
+                            <div class="bg-secondary bg-gradient h-auto rounded shadow-lg border border-2 border-warning d-flex flex-column justify-content-evenly" style="width: 350px;">
+                        <?php }else{ ?>
+                            <div class="bg-secondary bg-gradient h-auto rounded shadow-lg border border-2 border-success d-flex flex-column justify-content-evenly" style="width: 350px;">
+                        <?php } ?>
+                            
+                                <h2 class="text-light text-center mb-4 mt-4"><?= $row->title?></h2>
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <h4 class="text-light" style="width: 250px;">Categorie: <span class="text-info"><?= $row->categorie_name ?></span class="text-info"></h4>
+                                        <h4 class="text-light" style="width: 250px;">Author: <span class="text-info"><?= $row->first_name ?></span></h4>
+                                        <h4 class="text-light" style="width: 250px;">Author: <span class="text-info"><?= $row->tag_name ?></span></h4>
+                                    </div>
+                                    <div class="d-flex justify-content-around mt-4 mb-4">
+                                        <a href="http://localhost/Wiki/wiki/delete_wiki/delete_id?delete_id=<?= $row->id_wiki ?> & id_WT=<?= $row->id_WT ?>" class="btn btn-outline-danger">Delete</a>
+                                        <button class="btn btn-outline-warning">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
         </main>
     </div>
 </div>
