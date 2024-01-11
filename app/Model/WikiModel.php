@@ -88,18 +88,21 @@ class WikiModel {
     public function insert_wiki(){
         $conn = $this->conn->connect();
 
-        $query = "INSERT INTO wikis (content, title, date_create) 
-        VALUES ('{$this->wiki_content}', '{$this->wiki_title}', '{$this->date_create}')";
+        $query = "INSERT INTO wikis (content, title, categorie_id, users_Id,  date_create)
+        VALUES ('{$this->wiki_content}', '{$this->wiki_title}', '{$this->categorie_id}', '{$this->user_id}',  '{$this->date_create}')";
 
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $last_id = $conn->lastInsertId();
 
         if($stmt){
-            $query2 = "INSERT INTO wikis_tags (wiki_id, tag_id) 
-            VALUES ('$last_id', '{$this->tag_id}')";
-            $stmt2 = $conn->prepare($query2);
-            $stmt2->execute();
+            foreach($this->tag_id as $row_tag){
+                $query2 = "INSERT INTO wikis_tags (wiki_id, tag_id) 
+                VALUES ('$last_id', '$row_tag')";
+                $stmt2 = $conn->prepare($query2);
+                $stmt2->execute();
+            }
+            
             if($stmt2){
                 return true;
             }else{
@@ -110,22 +113,26 @@ class WikiModel {
         }
     }
 
+
+
     public function select_wiki(){
         $conn = $this->conn->connect();
 
         $query = "SELECT * FROM wikis
         INNER JOIN categories ON categorie_id = id_categorie
-        INNER JOIN users  ON user_id = id_user
-        INNER JOIN wikis_tags  ON id_wiki = wiki_id 
-        INNER JOIN tags  ON tag_id = id_tag";
+        INNER JOIN users  ON users_Id = id_user
+        INNER JOIN wikis_tags  ON id_wiki = wiki_id";
 
         $stmt = $conn->prepare($query);
         $stmt->execute();
 
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-        return !empty($result) ? $result : false;
+        return $result;
+        // return true;
     }
+
+
 
     public function select_options_tage(){
         $conn = $this->conn->connect();
@@ -156,10 +163,13 @@ class WikiModel {
         return !empty($result) ? $result : false;
     }
 
-    public function delete_wiki($id_WT){
+
+
+
+    public function delete_wiki(){
         $conn = $this->conn->connect();
 
-        $query = "DELETE FROM wikis_tags WHERE id_WT = '$id_WT'";
+        $query = "DELETE FROM wikis_tags WHERE wiki_id = '{$this->wiki_id}'";
         $stmt = $conn->prepare($query);
         $stmt->execute();
 
@@ -175,10 +185,6 @@ class WikiModel {
         }else {
             return false;
         }
-
-        
-
-        
     }
 
 }
