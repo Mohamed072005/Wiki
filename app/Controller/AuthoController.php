@@ -9,6 +9,10 @@ class AuthoController extends Controller {
         $this->view('login');
     }
 
+    public function to_login(){
+        $this->view('login');
+    }
+
     public function to_signup() {
         
         $this->view('signup');

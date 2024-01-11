@@ -11,13 +11,17 @@ include "../app/View/includs/header.php";
 
         <div class="dropdown">
             <button class="btn btn-dark dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <?=$_SESSION['first_name']?>
+                <?php if(isset($_SESSION['first_name'])){ echo $_SESSION['first_name'];}else {echo "actions";}?>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <?php if(isset($_SESSION['role_id'])){ ?>
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="http://localhost/Wiki/autho">Logout</a></li>
+                <li><a class="dropdown-item" href="http://localhost/Wiki/autho/logout">Logout</a></li>
+                <?php }else{ ?>
+                    <li><a class="dropdown-item" href="http://localhost/Wiki/autho/to_login">Login</a></li>
+                <?php } ?>
             </ul>
         </div>
     </div>
@@ -26,15 +30,22 @@ include "../app/View/includs/header.php";
     <div class="row">
         <aside class="col-md-2 bg-dark text-light p-4 aside">
 
-            <ul class="list-unstyled">
-                <?php if($_SESSION['role_id'] == 1){ ?>
-                    <li><a href="http://localhost/Wiki/home">dashboard</a></li>
-                    <li><a href="http://localhost/Wiki/tag/display_tag">Tags</a></li>
-                    <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
-                <?php } ?>
-                    <li><a href="http://localhost/Wiki/wiki/display_wiki">Wikis</a></li>
-                    <li><a href="">authors</a></li>
+        <ul class="list-unstyled">
+                <?php if(isset($_SESSION['role_id'])){ ?>
+
+
+                    <?php if($_SESSION['role_id'] == 1){ ?>
+                        <li><a href="http://localhost/Wiki/home">dashboard</a></li>
+                        <li><a href="http://localhost/Wiki/tag/display_tag">Tags</a></li>
+                        <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
+                    <?php } ?>
+                    <?php  if($_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 1 ){ ?>
+                        <li><a href="http://localhost/Wiki/wiki/display_wiki">Wikis</a></li>
+                    <?php }?>
                     
+                <?php }else {?>
+                    <li><a href="http://localhost/Wiki/wiki/display_wiki">About</a></li>
+                <?php } ?>
             </ul>
 
         </aside>
@@ -74,22 +85,33 @@ include "../app/View/includs/header.php";
                                                 <textarea type="text" id="contactNumber" class="form-control"
                                                        name="content" required></textarea>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 mt-3">
                                                 <label for="contactNumber" class="form-label d-block">The Categories:</label>
-                                                <?php foreach($data_cate as $rows){?>
-                                                    <input type="checkbox" class="" autocomplete="off">
-                                                    <label class="btn btn-outline-primary"><?= $rows->categorie_name ?></label>
-                                                <?php } ?>
-                                                
+                                                <div class="row">
+                                                    <?php foreach($data_cate as $rows){?>
+                                                        <div class="col-4">
+                                                            <div class="form-radio">
+                                                                <input type="radio" class="form-radio-input" id="<?= $rows->id_categorie ?>" name="categorie" value="<?= $rows->id_categorie ?>">
+                                                                <label class="form-radio-label" for="<?= $rows->id_categorie ?>"><?= $rows->categorie_name ?></label>
+                                                            </div>
+                                                        </div>
+                                                    <?php } ?>
+                                                    </div>
                                             </div>
-                                            <!-- <div class="mb-3">
-                                                <label for="pays" class="form-label">Hashtag:</label>
-                                                <select id ="js-example-basic-multiple" class="form-select" name="states[]" multiple="multiple">
-                                                    <option value="AL">Alabama</option>
-                                                    <option value="">ftftf</option>
-                                                    <option value="WY">Wyoming</option>
-                                                </select>
-                                            </div> -->
+                                            <div class="mb-3 mt-3">
+                                                <label for="contactNumber" class="form-label d-block">The Tags:</label>
+                                                <div class="row">
+                                                    <?php foreach($data_tag as $rows){?>
+                                                        <div class="col-4">
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input" id="<?= $rows->id_tag ?>" name="tag[]" value="<?= $rows->id_tag ?>">
+                                                                <label class="form-check-label" for="<?= $rows->id_tag ?>"><?= $rows->tag_name ?></label>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
                                             <button type="submit" name="submit" value="insert_wiki" class="btn btn-primary">add Wiki</button>
                                         </form>
                                     </div>
@@ -104,21 +126,28 @@ include "../app/View/includs/header.php";
                 <div class="container-fluid row h-50">
                     <?php foreach($data as $row){ ?>
                     <div class="col-md-4 mt-4 d-flex align-items-center">
-                        <?php if($row->wiki_status == 0){ ?>
-                            <div class="bg-secondary bg-gradient h-auto rounded shadow-lg border border-2 border-warning d-flex flex-column justify-content-evenly" style="width: 350px;">
-                        <?php }else{ ?>
-                            <div class="bg-secondary bg-gradient h-auto rounded shadow-lg border border-2 border-success d-flex flex-column justify-content-evenly" style="width: 350px;">
-                        <?php } ?>
-                            
-                                <h2 class="text-light text-center mb-4 mt-4"><?= $row->title?></h2>
-                                <div class="card-body">
+                        <?php if($_SESSION['role_id'] == 1){?>
+                            <?php if($row->wiki_status == 0){ ?>
+                                <div class="bg-secondary bg-gradient h-auto rounded shadow-lg border border-2 border-warning d-flex flex-column justify-content-evenly" style="width: 350px;">
+                            <?php }else{ ?>
+                                <div class="bg-secondary bg-gradient h-auto rounded shadow-lg border border-2 border-info d-flex flex-column justify-content-evenly" style="width: 350px;">
+                            <?php } ?>
+                        <?php }else { ?>
+                            <div class="bg-secondary bg-gradient h-auto rounded shadow-lg d-flex flex-column justify-content-evenly" style="width: 350px;">
+                            <?php } ?>
+                                <a href="http://localhost/Wiki/wiki/wiki_details" class="navbar-brand"><h2 class="text-light text-center mt-4"><?= $row->title?></h2>
+                                <div class="card-body mt-4">
                                     <div class="d-flex flex-column align-items-center">
                                         <h4 class="text-light" style="width: 250px;">Categorie: <span class="text-info"><?= $row->categorie_name ?></span class="text-info"></h4>
                                         <h4 class="text-light" style="width: 250px;">Author: <span class="text-info"><?= $row->first_name ?></span></h4>
-                                        <h4 class="text-light" style="width: 250px;">Author: <span class="text-info"><?= $row->tag_name ?></span></h4>
-                                    </div>
+                                    </div></a>
                                     <div class="d-flex justify-content-around mt-4 mb-4">
-                                        <a href="http://localhost/Wiki/wiki/delete_wiki/delete_id?delete_id=<?= $row->id_wiki ?> & id_WT=<?= $row->id_WT ?>" class="btn btn-outline-danger">Delete</a>
+                                        <a href="http://localhost/Wiki/wiki/delete_wiki/delete_id?delete_id=<?= $row->id_wiki ?>" class="btn btn-outline-danger">Delete</a>
+                                        <?php if($_SESSION['role_id'] == 1){ ?>
+                                            <?php if($row->wiki_status == 0){ ?>
+                                            <a href="http://localhost/Wiki/wiki/delete_wiki/delete_id?delete_id=<?= $row->id_wiki ?>" class="btn btn-outline-info">To Publish</a>
+                                            <?php } ?>
+                                        <?php } ?>
                                         <button class="btn btn-outline-warning">Update</button>
                                     </div>
                                 </div>
