@@ -3,7 +3,6 @@
 namespace App\Controller;
 use App\Core\Controller;
 use App\Model\WikiModel;
-use WeakMap;
 
 class WikiController extends Controller {
     public function index(){
@@ -12,7 +11,18 @@ class WikiController extends Controller {
 
 
     public function wiki_details(){
-        $this->view('wiki_details');
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['wiki_id'])){
+            $id_wiki = $_GET['wiki_id'];
+
+            $newWiki = new WikiModel();
+            $newWiki->setWikiId($id_wiki);
+            $result = $newWiki->select_details_wiki();
+            if($result){
+                $this->view('wiki_details', $result);
+            }else{
+                $this->view('404');
+            }
+        }
     }
 
 
@@ -24,6 +34,8 @@ class WikiController extends Controller {
             $tag_id = $_POST['tag'];
             $user_id = $_SESSION['user_id'];
             $date_create = date('y-m-d h:i:s');
+
+            $title = ucfirst($title);
 
             $newWiki = new WikiModel();
             $newWiki->setWikiContent($content);
@@ -82,6 +94,24 @@ class WikiController extends Controller {
             if($result){
                 $this->display_wiki();
             }else {
+                $this->view('404');
+            }
+
+        }
+    }
+
+
+    public function update_wiki_status(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['update_id'])){
+            $id_wiki = $_GET['update_id'];
+
+            $newWiki = new WikiModel();
+            $newWiki->setWikiId($id_wiki);
+            $result = $newWiki->update_status_wiki();
+
+            if($result){
+                $this->display_wiki();
+            }else{
                 $this->view('404');
             }
 

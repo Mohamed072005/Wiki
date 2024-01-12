@@ -120,8 +120,7 @@ class WikiModel {
 
         $query = "SELECT * FROM wikis
         INNER JOIN categories ON categorie_id = id_categorie
-        INNER JOIN users  ON users_Id = id_user
-        INNER JOIN wikis_tags  ON id_wiki = wiki_id";
+        INNER JOIN users  ON users_Id = id_user";
 
         $stmt = $conn->prepare($query);
         $stmt->execute();
@@ -185,6 +184,38 @@ class WikiModel {
         }else {
             return false;
         }
+    }
+
+
+    public function update_status_wiki(){
+        $conn = $this->conn->connect();
+
+        $query = "UPDATE wikis SET wiki_status = 1 WHERE id_wiki = '{$this->wiki_id}'";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        if($stmt){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public function select_details_wiki(){
+        $conn = $this->conn->connect();
+
+        $query = "SELECT * FROM wikis
+        INNER JOIN categories ON categorie_id = id_categorie
+        INNER JOIN users  ON users_Id = id_user
+        INNER JOIN wikis_tags ON id_wiki = wiki_id
+        INNER JOIN tags ON id_tag = tag_id WHERE id_wiki = '{$this->wiki_id}'";
+        
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 
 }

@@ -1,4 +1,6 @@
 <?php
+var_dump($data);
+die();
 include "../app/View/includs/header.php";
 ?>
 <body class="body-home">
@@ -52,11 +54,30 @@ include "../app/View/includs/header.php";
 
 
             <main class="col-md-10 p-3 main-content">
-
-            
-
-
-            
+                <div class="row">
+                    <div class="col-md-12 bg-danger d-flex justify-content-center mt-5 mb-4">
+                        <h2 class="text-light"><?= $data->wiki_title ?></h2>
+                    </div>
+                    <div class="col-md-12 mt-4 mb-5">
+                        <h4 class="text-light"><?= $data->wiki_content ?></h4>
+                    </div>
+                    <div class="col-6">
+                        <h3 class="text-light">The Categories</h3>
+                        <ul>
+                            <?php foreach($data->categorie_name as $categorieName){ ?>
+                            <li class="h4 text-light"><?= $categorieName ?></li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <h3 class="text-light">The Tags</h3>
+                        <ul>
+                        <?php foreach($data as $rows){ ?>
+                            <li class="h4 text-light"><?= $rows->tag_name ?></li>
+                        <?php } ?>
+                        </ul>
+                    </div>
+                </div>
         </main>
     </div>
 </div>
