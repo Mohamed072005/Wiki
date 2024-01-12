@@ -10,7 +10,8 @@ use App\Model\CategorieModel;
 
 class DashboardController extends Controller {
     public function index(){
-        $this->view('dashboard');
+        $this->display_statistique();
+        // $this->view('dashboard');
     }
 
     public function to_wikis(){
@@ -23,25 +24,11 @@ class DashboardController extends Controller {
     public function display_statistique(){
         $newWiki = new WikiModel();
         $wikiResult = $newWiki->wiki_statistique();
-        if($wikiResult){
-            $newtag = new TagModel();
-            $tagResult = $newtag->tag_statistique();
-            if($tagResult){
-                $newcategorie = new CategorieModel();
-                $cateResult = $newcategorie->categorie_statistique();
-                if($cateResult){
-                    $this->view('dashboard', $wikiResult, $tagResult, $cateResult);
-                }else{
-                    $this->view('404');
-                }
-            }else{
-                $this->view('404');
-            }
-        }else{
-            $this->view('404');
-        }
-        
-        
+        $newtag = new TagModel();
+        $tagResult = $newtag->tag_statistique();
+        $newcategorie = new CategorieModel();
+        $cateResult = $newcategorie->categorie_statistique();
+        $this->view('dashboard', $wikiResult, $tagResult, $cateResult);
     }
     
 }
