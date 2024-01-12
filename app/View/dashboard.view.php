@@ -1,5 +1,12 @@
 
 <?php
+if(isset($_SESSION['role_id'])){
+    if($_SESSION['role_id'] == 2){
+        header('location: http://localhost/Wiki/wiki/display_wiki');
+    }
+}else{
+    header('location: http://localhost/Wiki/about');
+}
 include "../app/View/includs/header.php";
 ?>
 <body class="body-home">
