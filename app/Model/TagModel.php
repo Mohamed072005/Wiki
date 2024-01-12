@@ -85,4 +85,17 @@ class TagModel {
             return false;
         }
     }
+
+
+    public function tag_statistique(){
+        $conn = $this->conn->connect();
+
+        $query = "SELECT COUNT(id_tag) FROM tags";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $result = (int) $stmt->fetchColumn();
+
+        return $result;
+    }
 }

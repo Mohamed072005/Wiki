@@ -42,7 +42,7 @@ include "../app/View/includs/header.php";
                     <button class="btn btn-outline-warning" name="submit" value="regester" type="submit">Sing in</button>
                 </div>
                 <div class="col-md-8">
-                    <?php if(!empty($_SESSION['error_signup'])){ echo $_SESSION['error_signup']; } ?>
+                    <?php if(!empty($_SESSION['error_signup'])){ echo $_SESSION['error_signup']; }else { echo ''; } ?>
                 </div>
                 <div class="col-12 text-center">
                     <span class = "text-light">Already have an account? <a class="link-color" href="http://localhost/Wiki/autho">log in</a></span>

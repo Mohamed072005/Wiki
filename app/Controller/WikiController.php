@@ -18,7 +18,13 @@ class WikiController extends Controller {
             $newWiki->setWikiId($id_wiki);
             $result = $newWiki->select_details_wiki();
             if($result){
-                $this->view('wiki_details', $result);
+                $result2 = $newWiki->select_details_tags();
+                if($result2){
+                    $this->view('wiki_details', $result, $result2);
+                }else{
+                    echo "hello, world";
+                    $this->view('404');
+                }
             }else{
                 $this->view('404');
             }

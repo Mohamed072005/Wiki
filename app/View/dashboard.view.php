@@ -1,12 +1,7 @@
+
 <?php
-
 include "../app/View/includs/header.php";
-
-// var_dump($data);
-// var_dump($data_tag);
-// die();
 ?>
-
 <body class="body-home">
 
 <header class="p-2">
@@ -36,7 +31,7 @@ include "../app/View/includs/header.php";
     <div class="row">
         <aside class="col-md-2 bg-dark text-light p-4 aside">
 
-        <ul class="list-unstyled">
+            <ul class="list-unstyled">
                 <?php if(isset($_SESSION['role_id'])){ ?>
 
 
@@ -58,28 +53,34 @@ include "../app/View/includs/header.php";
 
 
             <main class="col-md-10 p-3 main-content">
-                <div class="row">
-                    <div class="col-md-12 bg-danger d-flex justify-content-center mt-5 mb-4">
-                        <h2 class="text-light"><?= $data->title ?></h2>
+
+            <div class="container-fluid row h-50">
+                    <div class="col-md-4 mt-4 mb-4 d-flex justify-content-center align-items-center">
+                        <div class="bg-secondary bg-gradient rounded shadow-lg d-flex flex-column justify-content-evenly" style="width: 350px;">
+                            <h2 class="text-light text-center mt-4 mb-4">Categories</h2>   
+                            <div class="d-flex justify-content-around mt-4 mb-4">
+                                 <h3 class="text-light"><?= $data_cate ?></h3>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-12 mt-4 mb-5">
-                        <h4 class="text-light"><?= $data->content ?></h4>
+                    <div class="col-md-4 mt-4 mb-4 d-flex justify-content-center align-items-center">
+                        <div class="bg-secondary bg-gradient rounded shadow-lg d-flex flex-column justify-content-evenly" style="width: 350px;">
+                            <h2 class="text-light text-center mt-4 mb-4">Wikis</h2>   
+                            <div class="d-flex justify-content-around mt-4 mb-4">
+                                 <h3 class="text-light"><?= $data ?></h3>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <h3 class="text-light">The Categorie</h3>
-                        <ul>
-                            <li class="h4 text-light"><?= $data->categorie_name ?></li>
-                        </ul>
+                    <div class="col-md-4 mt-4 mb-4 d-flex justify-content-center align-items-center">
+                        <div class="bg-secondary bg-gradient rounded shadow-lg d-flex flex-column justify-content-evenly" style="width: 350px;">
+                            <h2 class="text-light text-center mt-4 mb-4">Tags</h2>   
+                            <div class="d-flex justify-content-around mt-4 mb-4">
+                                 <h3 class="text-light"><?= $data_tag   ?></h3>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <h3 class="text-light">The Tags</h3>
-                        <ul>
-                            <?php foreach($data_tag as $rows){ ?>
-                            <li class="h4 text-light"><?= $rows->tag_name ?></li>
-                            <?php } ?>
-                        </ul>
-                    </div>
-                </div>
+            </div>
+            
         </main>
     </div>
 </div>
@@ -90,3 +91,4 @@ include "../app/View/includs/header.php";
 </body>
 
 </html>
+
