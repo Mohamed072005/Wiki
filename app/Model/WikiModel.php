@@ -213,7 +213,32 @@ class WikiModel {
         $stmt = $conn->prepare($query);
         $stmt->execute();
 
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchObject();
+
+        return $result;
+    }
+
+
+    public function select_details_tags(){
+        $conn = $this->conn->connect();
+
+        $query = "SELECT * FROM wikis_tags
+        INNER JOIN tags ON id_tag = tag_id WHERE wiki_id = '{$this->wiki_id}'";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    public function wiki_statistique(){
+        $conn = $this->conn->connect();
+
+        $query = "SELECT COUNT(id_wiki) FROM wikis";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $result = (int) $stmt->fetchColumn();
 
         return $result;
     }

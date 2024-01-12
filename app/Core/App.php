@@ -39,7 +39,7 @@ class App {
     private static $method = "index";
 
     private static function splitURL() {
-        $url = isset($_GET['url']) ? $_GET['url'] : 'home';
+        $url = isset($_GET['url']) ? $_GET['url'] : 'dashboard';
         $url = trim($url, "/");
     
         return explode("/", $url);

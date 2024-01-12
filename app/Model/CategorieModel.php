@@ -80,4 +80,17 @@ class CategorieModel {
             return false;
         }
     }
+
+
+    public function categorie_statistique(){
+        $conn = $this->conn->connect();
+
+        $query = "SELECT COUNT(id_categorie) FROM categories";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $result = (int) $stmt->fetchColumn();
+
+        return $result;
+    }
 }

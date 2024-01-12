@@ -35,7 +35,7 @@ include "../app/View/includs/header.php";
 
 
                     <?php if($_SESSION['role_id'] == 1){ ?>
-                        <li><a href="http://localhost/Wiki/home">dashboard</a></li>
+                        <li><a href="http://localhost/Wiki/dashboard/display_statistique">dashboard</a></li>
                         <li><a href="http://localhost/Wiki/tag/display_tag">Tags</a></li>
                         <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
                     <?php } ?>
