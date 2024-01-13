@@ -243,4 +243,20 @@ class WikiModel {
         return $result;
     }
 
+
+    public function select_user_wikis(){
+        $conn = $this->conn->connect();
+
+        $query = "SELECT * FROM wikis
+        INNER JOIN categories ON categorie_id = id_categorie
+        INNER JOIN users  ON users_Id = id_user
+        INNER JOIN roles ON role_id = id_role WHERE users_Id = '{$this->user_id}'";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
 }

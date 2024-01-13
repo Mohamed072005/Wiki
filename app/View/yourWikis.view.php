@@ -1,5 +1,6 @@
 <?php
 
+
 include "../app/View/includs/header.php";
 ?>
     <body class="body-home">
@@ -127,16 +128,14 @@ include "../app/View/includs/header.php";
         
                         <div class="container-fluid row h-50">
         
-                        <?php if(isset($_SESSION['role_id'])){ 
+                        <?php if(isset($_SESSION['user_id']) && isset($_SESSION['role_id'])){
         
-                                if($_SESSION['role_id'] == 1){
-        
-                                    foreach($data as $row){ ?>
+                            foreach($data as $row){ 
+                                if($row->users_Id == $_SESSION['user_id']){?>
         
                             <div class="col-md-4 mt-4 d-flex align-items-center">
-                               
-        
-                                    <?php if($row->wiki_status == 0){ ?>
+
+                                <?php if($row->wiki_status == 0){ ?>
         
                                         <div class="bg-secondary bg-gradient h-auto rounded shadow-lg border border-3 border-warning d-flex flex-column justify-content-evenly" style="width: 350px;">
         
@@ -154,7 +153,7 @@ include "../app/View/includs/header.php";
                                             <div class="d-flex justify-content-around mt-4 mb-4">
                                                 <a href="http://localhost/wiki/wiki/delete_wiki/delete_id?delete_id=<?= $row->id_wiki ?>" class="btn btn-outline-danger">Delete</a>
                                                 <?php
-                                                        if($row->wiki_status == 0){ ?>
+                                                        if($row->wiki_status == 0 && $_SESSION['role_id'] == 1){ ?>
                                                         <a href="http://localhost/wiki/wiki/update_wiki_status/update_id?update_id=<?= $row->id_wiki ?>" class="btn btn-outline-info">To Publish</a>
                                                         <?php } else { echo ""; } ?>
                                                 <button class="btn btn-outline-warning">Update</button>
@@ -162,43 +161,7 @@ include "../app/View/includs/header.php";
                                         </div>
                                     </div>
                                 </div>
-                                <?php }}else if($_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 3){
-
-                                        foreach($data as $row){ 
-                                        
-                                        if($row->wiki_status == 1){ ?>
-        
-                                        <div class="col-md-4 mt-4 d-flex align-items-center">
-                                            <div class="bg-secondary bg-gradient h-auto rounded shadow-lg d-flex flex-column justify-content-evenly" style="width: 350px;">
-                                                <a href="http://localhost/wiki/wiki/wiki_details/wiki_id?wiki_id=<?= $row->id_wiki ?>" class="navbar-brand"><h2 class="text-light text-center mt-4"><?= $row->title?></h2>
-                                                <div class="card-body mt-4">
-                                                    <div class="d-flex flex-column align-items-center">
-                                                        <h4 class="text-light" style="width: 250px;">Categorie: <span class="text-info"><?= $row->categorie_name ?></span class="text-info"></h4>
-                                                        <h4 class="text-light" style="width: 250px;">Author: <span class="text-info"><?= $row->first_name ?></span></h4>
-                                                    </div></a>
-                                                    <div class="d-flex justify-content-around mt-4 mb-4">
-                                                        <a href="http://localhost/wiki/wiki/delete_wiki/delete_id?delete_id=<?= $row->id_wiki ?>" class="btn btn-outline-danger">Delete</a>
-                                                        <button class="btn btn-outline-warning">Update</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?php }}}}else{ 
-                                
-                                foreach($data as $row){ 
-                                    if($row->wiki_status == 1){?>
-                                    <div class="col-md-4 mt-4 d-flex align-items-center">
-                                        <div class="bg-secondary bg-gradient h-auto rounded shadow-lg d-flex flex-column justify-content-evenly" style="width: 350px;">
-                                            <a href="http://localhost/wiki/wiki/wiki_details/wiki_id?wiki_id=<?= $row->id_wiki ?>" class="navbar-brand"><h2 class="text-light text-center mt-4"><?= $row->title?></h2>
-                                            <div class="card-body mt-4">
-                                                <div class="d-flex flex-column align-items-center mb-4">
-                                                    <h4 class="text-light" style="width: 250px;">Categorie: <span class="text-info"><?= $row->categorie_name ?></span class="text-info"></h4>
-                                                    <h4 class="text-light" style="width: 250px;">Author: <span class="text-info"><?= $row->first_name ?></span></h4>
-                                                </div></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php }}}?>
+                                <?php }}} ?>
                                 </div>
                     </main>
                 </div>

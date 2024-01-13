@@ -5,7 +5,7 @@ include "../app/View/includs/header.php";
     <main class="d-flex flex-column align-items-center">
         <div class="d-flex flex-column align-items-center mt-5">
             <h3 class="text-light">Welcome To Wiki</h3>
-            <form method ="POST" name="myForm" action="http://localhost/Wiki/autho/signup" onsubmit="return validateForm()"  class="row w-50 justify-content-center g-3 mt-2">
+            <form method ="POST" name="myForm" action="http://localhost/wiki/autho/signup" onsubmit="return validateForm()"  class="row w-50 justify-content-center g-3 mt-2">
                 
                 <div class="col-md-4">
                     <label for="validationDefault01" class="form-label">First name</label>
@@ -45,10 +45,10 @@ include "../app/View/includs/header.php";
                     <?php if(!empty($_SESSION['error_signup'])){ echo $_SESSION['error_signup']; }else { echo ''; } ?>
                 </div>
                 <div class="col-12 text-center">
-                    <span class = "text-light">Already have an account? <a class="link-color" href="http://localhost/Wiki/autho">log in</a></span>
+                    <span class = "text-light">Already have an account? <a class="link-color" href="http://localhost/wiki/autho">log in</a></span>
                 </div>
             </form>
         </div>
     </main>
 </body>
-<script src="http://localhost/Wiki/public/assets/js/validateFormSingup.js"></script>
+<script src="http://localhost/wiki/public/assets/js/validateFormSingup.js"></script>

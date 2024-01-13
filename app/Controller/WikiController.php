@@ -123,4 +123,15 @@ class WikiController extends Controller {
 
         }
     }
+
+    public function display_user_wiki(){
+        if(isset($_SESSION['user_id'])){
+            $user_id = $_SESSION['user_id'];
+
+            $newWiki = new WikiModel();
+            $newWiki->setUserId($user_id);
+            $result = $newWiki->select_user_wikis();
+            $this->view('yourWikis', $result);
+        }
+    }
 }

@@ -5,7 +5,7 @@ include "../app/View/includs/header.php";
     <main class="d-flex flex-column align-items-center">
         <div class="d-flex flex-column align-items-center mt-5">
             <h3 class="text-light">Welcome To Wiki</h3>
-            <form method ="POST" action="http://localhost/Wiki/autho/login"  class="row w-75 justify-content-center g-3 mt-2">
+            <form method ="POST" action="http://localhost/wiki/autho/login"  class="row w-75 justify-content-center g-3 mt-2">
                 <div class="col-md-8">
                     <label for="validationDefaultUsername" class="form-label">Email</label>
                     <div class="input-group">
@@ -24,7 +24,7 @@ include "../app/View/includs/header.php";
                     <?php if(!empty($_SESSION['error_login'])){ echo $_SESSION['error_login']; }else { echo ''; } ?>
                 </div>
                 <div class="col-12 text-center">
-                    <span class="text-light">Need an account? <a class="link-color" href="http://localhost/Wiki/autho/to_signup">sing in</a></span>
+                    <span class="text-light">Need an account? <a class="link-color" href="http://localhost/wiki/autho/to_signup">sing in</a></span>
                 </div>
             </form>
         </div>

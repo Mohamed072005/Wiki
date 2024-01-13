@@ -1,11 +1,11 @@
 
 <?php
 if(isset($_SESSION['role_id'])){
-    if($_SESSION['role_id'] == 2){
-        header('location: http://localhost/Wiki/wiki/display_wiki');
+    if($_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 3){
+        header('location: http://localhost/wiki/wiki/display_wiki');
     }
-}else{
-    header('location: http://localhost/Wiki/about');
+}else {
+    header('location: http://localhost/wiki/wiki/display_wiki');
 }
 include "../app/View/includs/header.php";
 ?>
@@ -14,7 +14,7 @@ include "../app/View/includs/header.php";
 <header class="p-2">
     <div class="container d-flex justify-content-between align-items-center">
         <div>
-            <a href="http://localhost/Wiki/" class="navbar-brand"><h4 class="text-light">Wiki</h4></a>
+            <a href="http://localhost/wiki/" class="navbar-brand"><h4 class="text-light">Wiki</h4></a>
         </div>
 
         <div class="dropdown">
@@ -26,9 +26,9 @@ include "../app/View/includs/header.php";
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="http://localhost/Wiki/autho/logout">Logout</a></li>
+                <li><a class="dropdown-item" href="http://localhost/wiki/autho/logout">Logout</a></li>
                 <?php }else{ ?>
-                    <li><a class="dropdown-item" href="http://localhost/Wiki/autho/to_login">Login</a></li>
+                    <li><a class="dropdown-item" href="http://localhost/wiki/autho/to_login">Login</a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -38,23 +38,24 @@ include "../app/View/includs/header.php";
     <div class="row">
         <aside class="col-md-2 bg-dark text-light p-4 aside">
 
-            <ul class="list-unstyled">
-                <?php if(isset($_SESSION['role_id'])){ ?>
-
-
-                    <?php if($_SESSION['role_id'] == 1){ ?>
-                        <li><a href="http://localhost/Wiki/dashboard/display_statistique">dashboard</a></li>
-                        <li><a href="http://localhost/Wiki/tag/display_tag">Tags</a></li>
-                        <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
-                    <?php } ?>
-                    <?php  if($_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 1 ){ ?>
-                        <li><a href="http://localhost/Wiki/wiki/display_wiki">Wikis</a></li>
-                    <?php }?>
-                    
-                <?php }else {?>
-                    <li><a href="http://localhost/Wiki/wiki/display_wiki">About</a></li>
-                <?php } ?>
-            </ul>
+        <ul class="list-unstyled">
+                        <?php if(isset($_SESSION['role_id'])){ ?>
+        
+        
+                            <?php if($_SESSION['role_id'] == 1){ ?>
+                                <li><a href="http://localhost/wiki/dashboard/display_statistique">dashboard</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
+                            <?php } ?>
+                            <?php  if($_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 1 ){ ?>
+                                <li><a href="http://localhost/wiki/wiki/display_wiki">Wikis</a></li>
+                                <li><a href="http://localhost/wiki/wiki/display_user_wiki">Your Wikis</a></li>
+                            <?php }else {?>
+                                <li><a href="http://localhost/wiki/wiki/display_wiki">Home</a></li>
+                        <?php }}else{?>
+                                <li><a href="http://localhost/wiki/wiki/display_wiki">Home</a></li>
+                        <?php } ?>
+                    </ul>
 
         </aside>
 
@@ -62,6 +63,9 @@ include "../app/View/includs/header.php";
             <main class="col-md-10 p-3 main-content">
 
             <div class="container-fluid row h-50">
+                    <div class="col-md-12 mb-4 d-flex justify-content-center align-items-center">
+                        <h2 class="text-light">The statistics of your website</h2>
+                    </div>
                     <div class="col-md-4 mt-4 mb-4 d-flex justify-content-center align-items-center">
                         <div class="bg-secondary bg-gradient rounded shadow-lg d-flex flex-column justify-content-evenly" style="width: 350px;">
                             <h2 class="text-light text-center mt-4 mb-4">Categories</h2>   
