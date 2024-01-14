@@ -125,6 +125,7 @@ include "../app/View/includs/header.php";
                                         </div>
                                     </div>
                                 </div>
+                                <!-- modal final -->
                             </div>
                         </div>
                     </div>

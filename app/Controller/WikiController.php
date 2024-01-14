@@ -131,7 +131,34 @@ class WikiController extends Controller {
             $newWiki = new WikiModel();
             $newWiki->setUserId($user_id);
             $result = $newWiki->select_user_wikis();
-            $this->view('yourWikis', $result);
+            $result2 = $this->select_options_tags();
+            $result3 = $this->select_options_categories();
+            $this->view('yourWikis', $result, $result2, $result3);
+        }
+    }
+
+    public function update_wiki(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'update_wiki' && isset($_GET['update_id'])){
+            $wiki_id = $_GET['update_id'];
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+            $categorie_id = $_POST['categorie'];
+            $tag_id = $_POST['tag'];
+
+            $title = ucfirst($title);
+
+            $newWiki = new WikiModel();
+            $newWiki->setWikiContent($content);
+            $newWiki->setWikiTitle($title);
+            $newWiki->setCategorieId($categorie_id);
+            $newWiki->setTagId($tag_id);
+            $newWiki->setWikiId($wiki_id);
+            $result = $newWiki->update_wiki();
+            if($result){
+                $this->display_user_wiki();
+            }else {
+                $this->view('404');
+            }
         }
     }
 }
