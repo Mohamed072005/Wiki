@@ -39,27 +39,33 @@ include "../app/View/includs/header.php";
                                 <li><a href="http://localhost/wiki/dashboard/display_statistique">dashboard</a></li>
                                 <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
                                 <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
-                            <?php } ?>
-                            <?php  if($_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 1 ){ ?>
+                                <li><a href="http://localhost/wiki/wiki/display_user_wiki">Your Wikis</a></li>
+                                <li><a href="http://localhost/wiki/wiki/display_wiki">Wikis</a></li>
+                            <?php }else  if($_SESSION['role_id'] == 2){ ?>
                                 <li><a href="http://localhost/wiki/wiki/display_wiki">Wikis</a></li>
                                 <li><a href="http://localhost/wiki/wiki/display_user_wiki">Your Wikis</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
                             <?php }else {?>
                                 <li><a href="http://localhost/wiki/wiki/display_wiki">Home</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
                         <?php }}else{?>
                                 <li><a href="http://localhost/wiki/wiki/display_wiki">Home</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
                         <?php } ?>
                     </ul>
         
                 </aside>
         
         
-                    <main class="col-md-10 p-3 main-content">
+                <main class="col-md-10 p-3 main-content">
         
                         <div class="container-form-search container d-flex justify-content-center">
                             
                                 <form class="search-form w-75 d-flex justify-content-center" role="search">
-                                    <input id="search" class="search-input form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-warning">Search</button>
+                                    <input id="searchinput" class="search-input form-control me-2 w-50" type="search" placeholder="Search">
                                 </form>
                             
                         </div>
@@ -123,12 +129,8 @@ include "../app/View/includs/header.php";
                                 </div>
                             </div>
                         </section>
-
-                        <div id="search_result">
-                        </div>
         
-        
-                        <div class="container-fluid row h-50">
+            <div class="container-fluid row h-50 mt-5" id="searcharea">
         
                         <?php if(isset($_SESSION['role_id'])){ 
         
@@ -206,6 +208,26 @@ include "../app/View/includs/header.php";
         
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+            <script>
+                let searchInput = document.getElementById('searchinput');
+                let searchArea =  document.getElementById('searcharea');
+                searchInput.addEventListener('input', function(){
+                    let value = searchInput.value;
+                    if(value !== ""){
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "http://localhost/wiki/wiki/searchWiki", true);
+                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xhr.onreadystatechange = function(){
+                            if(xhr.readyState == 4 && xhr.status == 200){
+                                searchArea.innerHTML = "";
+                                searchArea.innerHTML +=  xhr.responseText;
+
+                            }
+                        }
+                        xhr.send("input=" + value);
+                    }
+                })
+            </script>
         </body>
 
 </html>

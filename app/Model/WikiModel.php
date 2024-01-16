@@ -292,4 +292,18 @@ class WikiModel {
         }
     }
 
+
+    public function searchByName($searchTerm) {
+        $conn = $this->conn->connect();
+        $query = "SELECT * FROM wikis
+        INNER JOIN categories ON categorie_id = id_categorie
+        INNER JOIN users  ON users_Id = id_user WHERE title LIKE ? AND wiki_status = 1";
+        $stmt = $conn->prepare($query);
+        $stmt->execute(["%$searchTerm%"]);
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if ($result) {
+            return $result;
+        }
+    }
+
 }

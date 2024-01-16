@@ -44,14 +44,21 @@ include "../app/View/includs/header.php";
                                 <li><a href="http://localhost/wiki/dashboard/display_statistique">dashboard</a></li>
                                 <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
                                 <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
-                            <?php } ?>
-                            <?php  if($_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 1 ){ ?>
+                                <li><a href="http://localhost/wiki/wiki/display_user_wiki">Your Wikis</a></li>
+                                <li><a href="http://localhost/wiki/wiki/display_wiki">Wikis</a></li>
+                            <?php }else  if($_SESSION['role_id'] == 2){ ?>
                                 <li><a href="http://localhost/wiki/wiki/display_wiki">Wikis</a></li>
                                 <li><a href="http://localhost/wiki/wiki/display_user_wiki">Your Wikis</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
                             <?php }else {?>
                                 <li><a href="http://localhost/wiki/wiki/display_wiki">Home</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
                         <?php }}else{?>
                                 <li><a href="http://localhost/wiki/wiki/display_wiki">Home</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
                         <?php } ?>
                     </ul>
 
