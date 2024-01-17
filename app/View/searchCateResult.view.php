@@ -1,4 +1,4 @@
-<?php foreach($data as $row){ ?> 
+<?php if(isset($data)){foreach($data as $row){ ?>
     <div class="col-md-4 mt-4 d-flex align-items-center">
         <div class="bg-secondary bg-gradient rounded shadow-lg d-flex flex-column justify-content-evenly" style="width: 350px;">
             <h2 class="text-light text-center mb-4 mt-4"><?= $row->categorie_name ?></h2>   
@@ -36,4 +36,4 @@
             </div>
         </div>
     </div>
-<?php } ?>
+<?php }} ?>
