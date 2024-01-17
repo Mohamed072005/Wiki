@@ -221,11 +221,13 @@ include "../app/View/includs/header.php";
                             if(xhr.readyState == 4 && xhr.status == 200){
                                 searchArea.innerHTML = "";
                                 searchArea.innerHTML +=  xhr.responseText;
-
                             }
                         }
                         xhr.send("input=" + value);
-                    }
+                    }else{
+                                searchArea.innerText = 'No Result';
+                                searchArea.style.color = 'white';
+                            }
                 })
             </script>
         </body>

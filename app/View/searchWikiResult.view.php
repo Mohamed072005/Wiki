@@ -1,4 +1,5 @@
-<?php foreach($data as $row){ ?>
+
+<?php if(isset($data)){foreach($data as $row){ ?>
 
     <div class="col-md-4 mt-4 d-flex align-items-center">
     <?php if($row->wiki_status == 0){ ?>
@@ -27,4 +28,4 @@
         </div>
         </div>
     </div>
-    <?php } ?>
+    <?php }} ?>
