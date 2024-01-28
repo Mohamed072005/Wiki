@@ -14,7 +14,7 @@ include "../app/View/includs/header.php";
                 <h3 class="text-center text-light">Wiki Family</h3>
             </div>
             <div class="text-center mt-4">
-                <a class="btn btn-outline-warning" href="http://localhost/Wiki/">Enter</a>
+                <a class="btn btn-outline-warning" href="http://localhost/wiki/">Enter</a>
             </div>
         </div>
     </main>

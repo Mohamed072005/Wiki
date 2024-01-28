@@ -66,4 +66,13 @@ class TagController extends Controller {
             }
         }
     }
+
+    public function searchTag(){
+        if(isset($_POST['input'])){
+            $searchTerm = $_POST['input'];
+            $newTag = new TagModel();
+            $searchResults = $newTag->searchByName($searchTerm);
+            $this->view('searchTagResult', $searchResults);
+        }
+    }
 }

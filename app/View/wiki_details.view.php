@@ -12,7 +12,7 @@ include "../app/View/includs/header.php";
 <header class="p-2">
     <div class="container d-flex justify-content-between align-items-center">
         <div>
-            <a href="http://localhost/Wiki/" class="navbar-brand"><h4 class="text-light">Wiki</h4></a>
+            <a href="http://localhost/wiki/" class="navbar-brand"><h4 class="text-light">Wiki</h4></a>
         </div>
 
         <div class="dropdown">
@@ -24,9 +24,9 @@ include "../app/View/includs/header.php";
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="http://localhost/Wiki/autho/logout">Logout</a></li>
+                <li><a class="dropdown-item" href="http://localhost/wiki/autho/logout">Logout</a></li>
                 <?php }else{ ?>
-                    <li><a class="dropdown-item" href="http://localhost/Wiki/autho/to_login">Login</a></li>
+                    <li><a class="dropdown-item" href="http://localhost/wiki/autho/to_login">Login</a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -37,45 +37,53 @@ include "../app/View/includs/header.php";
         <aside class="col-md-2 bg-dark text-light p-4 aside">
 
         <ul class="list-unstyled">
-                <?php if(isset($_SESSION['role_id'])){ ?>
-
-
-                    <?php if($_SESSION['role_id'] == 1){ ?>
-                        <li><a href="http://localhost/Wiki/dashboard/display_statistique">dashboard</a></li>
-                        <li><a href="http://localhost/Wiki/tag/display_tag">Tags</a></li>
-                        <li><a href="http://localhost/Wiki/categorie/display_categorie">Categories</a></li>
-                    <?php } ?>
-                    <?php  if($_SESSION['role_id'] == 2 || $_SESSION['role_id'] == 1 ){ ?>
-                        <li><a href="http://localhost/Wiki/wiki/display_wiki">Wikis</a></li>
-                    <?php }?>
-                    
-                <?php }else {?>
-                    <li><a href="http://localhost/Wiki/wiki/display_wiki">About</a></li>
-                <?php } ?>
-            </ul>
+                        <?php if(isset($_SESSION['role_id'])){ ?>
+        
+        
+                            <?php if($_SESSION['role_id'] == 1){ ?>
+                                <li><a href="http://localhost/wiki/dashboard/display_statistique">dashboard</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
+                                <li><a href="http://localhost/wiki/wiki/display_user_wiki">Your Wikis</a></li>
+                                <li><a href="http://localhost/wiki/wiki/display_wiki">Wikis</a></li>
+                            <?php }else  if($_SESSION['role_id'] == 2){ ?>
+                                <li><a href="http://localhost/wiki/wiki/display_wiki">Wikis</a></li>
+                                <li><a href="http://localhost/wiki/wiki/display_user_wiki">Your Wikis</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
+                            <?php }else {?>
+                                <li><a href="http://localhost/wiki/wiki/display_wiki">Home</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
+                        <?php }}else{?>
+                                <li><a href="http://localhost/wiki/wiki/display_wiki">Home</a></li>
+                                <li><a href="http://localhost/wiki/tag/display_tag">Tags</a></li>
+                                <li><a href="http://localhost/wiki/categorie/display_categorie">Categories</a></li>
+                        <?php } ?>
+                    </ul>
 
         </aside>
 
 
-            <main class="col-md-10 p-3 main-content">
-                <div class="row">
-                    <div class="col-md-12 bg-danger d-flex justify-content-center mt-5 mb-4">
+            <main class="col-md-10 p-3 main-content ">
+                <div class="row  border border-3 border-light rounded " style="width: 90%;">
+                    <div class="col-md-12 text-center mt-3 mb-2">
                         <h2 class="text-light"><?= $data->title ?></h2>
                     </div>
-                    <div class="col-md-12 mt-4 mb-5">
-                        <h4 class="text-light"><?= $data->content ?></h4>
+                    <div class="col-md-12 ">
+                        <p class="text-light mb-4"><?= $data->content ?></p>
                     </div>
                     <div class="col-6">
-                        <h3 class="text-light">The Categorie</h3>
+                        <h4 class="text-light">The Categorie</h4>
                         <ul>
-                            <li class="h4 text-light"><?= $data->categorie_name ?></li>
+                            <li class="h6 text-light"><?= $data->categorie_name ?></li>
                         </ul>
                     </div>
                     <div class="col-6">
-                        <h3 class="text-light">The Tags</h3>
+                        <h4 class="text-light">The Tags</h4>
                         <ul>
                             <?php foreach($data_tag as $rows){ ?>
-                            <li class="h4 text-light"><?= $rows->tag_name ?></li>
+                            <li class="h6 text-light"><?= $rows->tag_name ?></li>
                             <?php } ?>
                         </ul>
                     </div>

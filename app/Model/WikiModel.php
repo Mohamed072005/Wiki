@@ -243,4 +243,67 @@ class WikiModel {
         return $result;
     }
 
+
+    public function select_user_wikis(){
+        $conn = $this->conn->connect();
+
+        $query = "SELECT * FROM wikis
+        INNER JOIN categories ON categorie_id = id_categorie
+        INNER JOIN users  ON users_Id = id_user
+        INNER JOIN roles ON role_id = id_role WHERE users_Id = '{$this->user_id}'";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+
+    public function update_wiki(){
+        $conn = $this->conn->connect();
+
+        $query = "UPDATE wikis SET title = '{$this->wiki_title}', content = '{$this->wiki_content}' WHERE id_wiki = '{$this->wiki_id}'";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        if($stmt){
+            $query2 = "DELETE FROM wikis_tags WHERE wiki_id = '{$this->wiki_id}' WHERE id_wiki = '{$this->wiki_id}'";
+            $stmt2 = $conn->prepare($query2);
+            $stmt2->execute();
+
+            if($stmt2){
+                foreach($this->tag_id as $row_tag){
+                    $query3 = "INSERT INTO wikis_tags (wiki_id, tag_id) 
+                    VALUES ('{$this->wiki_id}', '$row_tag')";
+                    $stmt3 = $conn->prepare($query3);
+                    $stmt3->execute();
+                }
+                if($stmt3){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
+
+    public function searchByName($searchTerm) {
+        $conn = $this->conn->connect();
+        $query = "SELECT * FROM wikis
+        INNER JOIN categories ON categorie_id = id_categorie
+        INNER JOIN users  ON users_Id = id_user WHERE title LIKE ? AND wiki_status = 1";
+        $stmt = $conn->prepare($query);
+        $stmt->execute(["%$searchTerm%"]);
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if ($result) {
+            return $result;
+        }
+    }
+
 }

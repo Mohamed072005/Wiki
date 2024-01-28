@@ -3,7 +3,7 @@
 }
 
 .container-fluid {
-    height: auto;
+    height: 100vh;
 }
 
 .aside {
@@ -47,4 +47,13 @@ header {
 
 ::placeholder {
     color: white;
+}
+
+@media only screen and (max-width: 766px){
+    .container-fluid {
+        height: 25%;
+    }
+    .aside {
+        height: 100%;
+    }
 }
