@@ -166,7 +166,10 @@ include "../app/View/includs/header.php";
                     }
                 }
                 xhr.send("input=" + value);
-            }
+            }else{
+                                searchArea.innerText = 'No Result';
+                                searchArea.style.color = 'white';
+                            }
         })
     </script>
 

@@ -263,12 +263,12 @@ class WikiModel {
     public function update_wiki(){
         $conn = $this->conn->connect();
 
-        $query = "UPDATE wikis SET title = '{$this->wiki_title}', content = '{$this->wiki_content}'";
+        $query = "UPDATE wikis SET title = '{$this->wiki_title}', content = '{$this->wiki_content}' WHERE id_wiki = '{$this->wiki_id}'";
         $stmt = $conn->prepare($query);
         $stmt->execute();
 
         if($stmt){
-            $query2 = "DELETE FROM wikis_tags WHERE wiki_id = '{$this->wiki_id}'";
+            $query2 = "DELETE FROM wikis_tags WHERE wiki_id = '{$this->wiki_id}' WHERE id_wiki = '{$this->wiki_id}'";
             $stmt2 = $conn->prepare($query2);
             $stmt2->execute();
 
