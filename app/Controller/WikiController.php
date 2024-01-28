@@ -34,29 +34,34 @@ class WikiController extends Controller {
 
     public function insert_wiki(){
         if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'insert_wiki'){
-            $title = $_POST['title'];
-            $content = $_POST['content'];
-            $categorie_id = $_POST['categorie'];
-            $tag_id = $_POST['tag'];
-            $user_id = $_SESSION['user_id'];
-            $date_create = date('y-m-d h:i:s');
-
-            $title = ucfirst($title);
-
-            $newWiki = new WikiModel();
-            $newWiki->setWikiContent($content);
-            $newWiki->setWikiTitle($title);
-            $newWiki->setCategorieId($categorie_id);
-            $newWiki->setTagId($tag_id);
-            $newWiki->setDateCreate($date_create);
-            $newWiki->setUserId($user_id);
-            $result = $newWiki->insert_wiki();
-
-            if($result){
-                $this->display_wiki();
-            }else {
-                $this->view('404');
+            if(isset($_SESSION['user_id'])){
+                $title = $_POST['title'];
+                $content = $_POST['content'];
+                $categorie_id = $_POST['categorie'];
+                $tag_id = $_POST['tag'];
+                $user_id = $_SESSION['user_id'];
+                $date_create = date('y-m-d h:i:s');
+    
+                $title = ucfirst($title);
+    
+                $newWiki = new WikiModel();
+                $newWiki->setWikiContent($content);
+                $newWiki->setWikiTitle($title);
+                $newWiki->setCategorieId($categorie_id);
+                $newWiki->setTagId($tag_id);
+                $newWiki->setDateCreate($date_create);
+                $newWiki->setUserId($user_id);
+                $result = $newWiki->insert_wiki();
+    
+                if($result){
+                    $this->display_wiki();
+                }else {
+                    $this->view('404');
+                }
+            }else{
+                $this->view('login');
             }
+            
         }
     }
 
@@ -121,6 +126,54 @@ class WikiController extends Controller {
                 $this->view('404');
             }
 
+        }
+    }
+
+    public function display_user_wiki(){
+        if(isset($_SESSION['user_id'])){
+            $user_id = $_SESSION['user_id'];
+
+            $newWiki = new WikiModel();
+            $newWiki->setUserId($user_id);
+            $result = $newWiki->select_user_wikis();
+            $result2 = $this->select_options_tags();
+            $result3 = $this->select_options_categories();
+            $this->view('yourWikis', $result, $result2, $result3);
+        }
+    }
+
+    public function update_wiki(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'update_wiki' && isset($_GET['update_id'])){
+            $wiki_id = $_GET['update_id'];
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+            $categorie_id = $_POST['categorie'];
+            $tag_id = $_POST['tag'];
+
+            $title = ucfirst($title);
+
+            $newWiki = new WikiModel();
+            $newWiki->setWikiContent($content);
+            $newWiki->setWikiTitle($title);
+            $newWiki->setCategorieId($categorie_id);
+            $newWiki->setTagId($tag_id);
+            $newWiki->setWikiId($wiki_id);
+            $result = $newWiki->update_wiki();
+            if($result){
+                $this->display_user_wiki();
+            }else {
+                $this->view('404');
+            }
+        }
+    }
+
+
+    public function searchWiki() {
+        if (isset($_POST['input'])) {
+            $searchTerm = $_POST['input'];
+            $wiki = new WikiModel();
+            $searchResults = $wiki->searchByName($searchTerm);
+            $this->view('searchWikiResult', $searchResults);
         }
     }
 }

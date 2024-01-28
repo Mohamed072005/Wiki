@@ -57,20 +57,30 @@ class CategorieController extends Controller {
 
         if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit'] == 'update_categorie' && isset($_GET['update_id'])){
 
-                $categorie_id = $_GET['update_id'];
-                $categorie_name = $_POST['categorie_name'];
-    
-                $newCategorie = new CategorieModel();
-                $newCategorie->set_categories_id($categorie_id);
-                $newCategorie->set_categories_name($categorie_name);
-                $result = $newCategorie->update_categorie();
-    
-                if($result){
-                    $this->display_categorie();
-                }else{
-                    $this->view('categories');
-                }
+            $categorie_id = $_GET['update_id'];
+            $categorie_name = $_POST['categorie_name'];
+
+            $newCategorie = new CategorieModel();
+            $newCategorie->set_categories_id($categorie_id);
+            $newCategorie->set_categories_name($categorie_name);
+            $result = $newCategorie->update_categorie();
+
+            if($result){
+                $this->display_categorie();
+            }else{
+                $this->view('categories');
             }
-            
         }
+            
+    }
+
+
+    public function searchCategorie(){
+        if(isset($_POST['input'])){
+            $searchTerm = $_POST['input'];
+            $wiki = new CategorieModel();
+            $searchResults = $wiki->searchByName($searchTerm);
+            $this->view('searchCateResult', $searchResults);
+        }
+    }
 }

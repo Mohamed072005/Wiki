@@ -93,4 +93,17 @@ class CategorieModel {
 
         return $result;
     }
+
+
+    public function searchByName($searchTerm){
+        $conn = $this->conn->connect();
+
+        $query = "SELECT * FROM categories WHERE categorie_name LIKE ? ";
+        $stmt = $conn->prepare($query);
+        $stmt->execute(["%$searchTerm%"]);
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
 }

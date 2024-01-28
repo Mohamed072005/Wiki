@@ -98,4 +98,16 @@ class TagModel {
 
         return $result;
     }
+
+    public function searchByName($input){
+        $conn = $this->conn->connect();
+
+        $query = "SELECT * FROM tags WHERE tag_name LIKE ? ";
+        $stmt = $conn->prepare($query);
+        $stmt->execute(["%$input%"]);
+
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
 }
